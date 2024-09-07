@@ -95,3 +95,89 @@ LIMIT 5;
 SELECT * FROM Actors
 ORDER BY birth_year ASC
 LIMIT 3;
+
+-- БД Лаб. №2
+
+-- 1.
+SELECT * FROM students_table;
+
+-- 2.
+SELECT * FROM students_table
+WHERE Course = 3;
+
+-- 3.
+SELECT * FROM students_table
+WHERE DateOfBirth > 1994-02-03;
+
+-- 4.
+SELECT * FROM students_table
+WHERE GPA >= 70 AND GPA <= 85;
+
+SELECT * FROM students_table
+WHERE GPA BETWEEN 70 AND 85;
+
+-- 5.
+SELECT * FROM students_table
+WHERE Course >= 2 AND Course <= 3;
+
+SELECT * FROM students_table
+WHERE Course IN (2, 3);
+
+-- 6.
+SELECT * FROM students_table
+WHERE StudentName LIKE 'С%' OR
+StudentName LIKE 'К%';
+
+-- 7.
+SELECT * FROM students_table
+WHERE Sex = 'ж' AND StudentGroup LIKE 'АУС%'
+
+-- 8.
+SELECT * FROM students_table
+WHERE Hobby = '-'
+
+-- 9.
+SELECT Course FROM students_table
+GROUP BY Course
+ORDER BY Course;
+
+-- 10.
+SELECT * FROM students_table
+ORDER BY GPA ASC LIMIT 5;
+
+-- 11.
+SELECT * FROM students_table
+ORDER BY GPA ASC, StudentName ASC
+LIMIT 10;
+
+-- 12.
+CREATE TABLE students_statistics (
+number_of_students INT,
+students_without_hobby INT,
+max_gpa FLOAT,
+min_gpa FLOAT,
+avg_gpa FLOAT
+); 
+
+INSERT INTO students_statistics (number_of_students, students_without_hobby, max_gpa, min_gpa, avg_gpa)
+SELECT
+(SELECT COUNT(*) FROM students_table) AS number_of_students,
+(SELECT COUNT(*) FROM students_table WHERE Hobby = '-') AS students_without_hobby,
+(SELECT MAX(GPA) FROM students_table) AS max_gpa,
+(SELECT MIN(GPA) FROM students_table) AS min_gpa,
+(SELECT AVG(GPA) FROM students_table) AS avg_gpa;
+
+-- 13.
+SELECT COUNT(*) FROM students_table 
+GROUP BY Course
+ORDER BY Course;
+
+
+-- 14.
+SELECT AVG(GPA) FROM students_table 
+GROUP BY Sex
+ORDER BY Sex;
+
+-- 15.
+SELECT MAX(GPA) FROM students_table 
+WHERE Course = 3 AND DateOfBirth >= 1993-01-01;
