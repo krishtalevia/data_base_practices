@@ -22,6 +22,19 @@ VALUES
 ('Mad Max: Fury Road', 2015, 'Action', 8.1),
 ('La La Land', 2016, 'Musical', 8.0);
 
+INSERT INTO Actors (full_name, birth_year, nationality)
+VALUES
+('Louis de Funès', 1914, 'French'),
+('Pierre Richard', 1934, 'French'),
+('Owen Wilson', 1968, 'American'),
+('Ben Stiller', 1965, 'American'),
+('Keanu Reeves', 1964, 'Canadian'),
+('Denzel Washington', 1954, 'American'),
+('Bob Odenkirk', 1962, 'American'),
+('Bryan Cranston', 1956, 'American'),
+('Aaron Paul', 1979, 'American'),
+('Kurt Russell', 1951, 'American');
+
 CREATE TABLE Actors (
 id INT PRIMARY KEY AUTO_INCREMENT,
 full_name VARCHAR(50) NOT NULL,
