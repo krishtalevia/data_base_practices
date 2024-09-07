@@ -21,3 +21,19 @@ VALUES
 ('John Wick', 2014, 'Action', 7.4),
 ('Mad Max: Fury Road', 2015, 'Action', 8.1),
 ('La La Land', 2016, 'Musical', 8.0);
+
+-- Задача №1.1
+SELECT * FROM Movies
+WHERE release_year > 2010 AND rating > 8.0
+ORDER BY rating DESC;
+
+-- Задача №1.2
+SELECT genre
+FROM Movies
+GROUP BY genre
+ORDER BY genre;
+
+-- Задача №1.3
+SELECT *
+FROM Movies
+ORDER BY rating DESC LIMIT 10;
