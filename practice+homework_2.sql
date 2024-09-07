@@ -22,6 +22,21 @@ VALUES
 ('Mad Max: Fury Road', 2015, 'Action', 8.1),
 ('La La Land', 2016, 'Musical', 8.0);
 
+CREATE TABLE Actors (
+id INT PRIMARY KEY AUTO_INCREMENT,
+full_name VARCHAR(50) NOT NULL,
+birth_year YEAR,
+nationality VARCHAR(50)
+);
+
+CREATE TABLE Movie_Actors (
+movie_id INT,
+actor_id INT,
+actor_role VARCHAR(50),
+FOREIGN KEY (movie_id) REFERENCES Movies(id),
+FOREIGN KEY (actor_id) REFERENCES Actors(id)
+);
+
 -- Задача №1.1
 SELECT * FROM Movies
 WHERE release_year > 2010 AND rating > 8.0
@@ -37,3 +52,4 @@ ORDER BY genre;
 SELECT *
 FROM Movies
 ORDER BY rating DESC LIMIT 10;
+
