@@ -66,3 +66,32 @@ SELECT *
 FROM Movies
 ORDER BY rating DESC LIMIT 10;
 
+-- Задача №1.4
+SELECT * FROM Actors
+WHERE birth_year < 1980
+ORDER BY birth_year;
+
+-- Задача №1.5
+SELECT * FROM Movies
+WHERE genre = 'Sci-Fi'
+ORDER BY title;
+
+-- Задача №1.6
+SELECT * FROM Actors
+GROUP BY nationality
+ORDER BY nationality DESC;
+
+-- Задача №1.7
+SELECT title, rating FROM Movies
+WHERE rating < 5.0
+ORDER BY rating DESC;
+
+-- Задача №1.8
+SELECT * FROM Movies
+ORDER BY release_year DESC
+LIMIT 5;
+
+-- Задача №1.9
+SELECT * FROM Actors
+ORDER BY birth_year ASC
+LIMIT 3;
