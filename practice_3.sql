@@ -63,3 +63,64 @@ JOIN Customers ON Orders.customer_id = Customers.id
 ORDER BY Customers.first_name, Orders.order_date;
 
 -- Задача №2
+SELECT Customers.first_name AS 'Имя клиента', Dishes.dish_name AS 'Название блюда'
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Customers ON Orders.customer_id = Customers.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+ORDER BY Customers.first_name, Dishes.dish_name;
+
+-- Задча №3
+SELECT Customers.first_name AS 'Имя клиента', 
+SUM(Dishes.price * Order_Dishes.quantity) AS 'Сумма всех заказов'
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Customers ON Orders.customer_id = Customers.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+GROUP BY Customers.first_name
+ORDER BY Dishes.price DESC;
+
+-- Задача №4
+SELECT Customers.first_name AS 'Имя клиента', Order_Dishes.quantity AS 'Кол-во блюд'
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Customers ON Orders.customer_id = Customers.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+GROUP BY Customers.first_name
+ORDER BY Order_Dishes.quantity DESC;
+
+
+-- Задача №5
+SELECT Dishes.dish_name AS 'Название блюда', Order_Dishes.quantity AS 'Кол-во заказов'
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+GROUP BY Dishes.dish_name
+ORDER BY Order_Dishes.quantity DESC;
+
+-- Задача №6
+SELECT Customers.first_name
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+JOIN Customers ON Orders.customer_id = Customers.id
+GROUP BY Customers.first_name
+HAVING SUM(Dishes.price * Order_Dishes.quantity) > 50.0;
+
+-- Задача №7
+SELECT Customers.first_name AS 'Имя клиента', 
+	Orders.order_date AS 'Дата', 
+	Order_Dishes.quantity AS 'Кол-во'
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+JOIN Customers ON Orders.customer_id = Customers.id
+GROUP BY Customers.first_name, Order_Dishes.quantity;
+
+-- Задача №8
+SELECT Dishes.category AS 'Категория',  
+	Order_Dishes.quantity AS 'Кол-во'
+FROM Order_Dishes
+JOIN Orders ON Order_Dishes.order_id = Orders.id
+JOIN Dishes ON Order_Dishes.dish_id = Dishes.id
+GROUP BY Order_Dishes.quantity DESC;
