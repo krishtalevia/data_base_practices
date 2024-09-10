@@ -159,19 +159,10 @@ min_gpa FLOAT,
 avg_gpa FLOAT
 ); 
 
-INSERT INTO students_statistics (number_of_students, students_without_hobby, max_gpa, min_gpa, avg_gpa)
-SELECT
-(SELECT COUNT(*) FROM students_table) AS number_of_students,
-(SELECT COUNT(*) FROM students_table WHERE Hobby = '-') AS students_without_hobby,
-(SELECT MAX(GPA) FROM students_table) AS max_gpa,
-(SELECT MIN(GPA) FROM students_table) AS min_gpa,
-(SELECT AVG(GPA) FROM students_table) AS avg_gpa;
-
 -- 13.
 SELECT COUNT(*) FROM students_table 
 GROUP BY Course
 ORDER BY Course;
-
 
 -- 14.
 SELECT AVG(GPA) FROM students_table 
