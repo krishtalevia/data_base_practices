@@ -163,4 +163,65 @@ WHERE `Players`.`guild_id` = (
 	FROM `Guilds`
 	WHERE `level` = (SELECT MAX(`level`) FROM `Guilds`)
 );
+
+-- 4
+SELECT `Players`.*
+FROM `Players`
+WHERE `Players`.`player_id` = 
+(SELECT `player_id` FROM `Items`
+	WHERE `rarity` = 'Редкий'
+	GROUP BY `Items`.`player_id`);
+
+-- 5
+SELECT `Players`.*
+FROM `Players`
+JOIN `Items` ON `Players`.`player_id` = `Items`.`player_id`
+WHERE COUNT(`Items`.`item_id`) > (
+	SELECT COUNT(`Items`.`item_id`)
+	FROM `Items`
+	JOIN `Items` ON `Players`.`player_id` = `Items`.`player_id`
+	WHERE `Players`.`player_name` = 'Екатерина');
 	
+-- 6
+SELECT `item_name`
+FROM `Items`
+WHERE `item_id` IN (
+	SELECT `item_id`
+	FROM `Items`
+	WHERE `item_type` = 'Оружие'
+	);
+
+-- 7
+SELECT `Guilds`.`guild_name`, 
+	(SELECT COUNT(`player_id`)
+	FROM `Players`
+	WHERE `Players`.`guild_id` = `Guilds`.`guild_id`) AS `player_count`
+FROM `Guilds`;
+
+-- 8
+SELECT `Players`.`player_name`
+FROM `Players`
+JOIN `Items` ON `Players`.`player_id` = `Items`.`player_id`
+GROUP BY `Players`.`player_name`
+HAVING `Players`.`player_id` = 
+	(SELECT `player_id` FROM `Items`
+	WHERE `item_type` = 'Броня');
+
+-- 9
+SELECT `Players`.`player_name`, `Players`.`player_level`
+FROM `Players`
+JOIN `Guilds` ON `Players`.`guild_id` = `Guilds`.`guild_id`
+GROUP BY `Players`.`player_name`
+HAVING `Players`.`guild_id` IN (
+	SELECT `Guilds`.`guild_id`
+	FROM `Guilds`
+	WHERE `Guilds`.`level` >= 2)
+AND `Players`.`level` > 5;
+
+-- 10
+SELECT *
+FROM `Players`
+WHERE `player_id` = (
+	SELECT `player_id` 
+	FROM `Items`
+	WHERE `rarity` = 'Эпический');
